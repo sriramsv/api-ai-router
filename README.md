@@ -8,11 +8,12 @@ This provides a REST-API to hit several bots with their respective client tokens
 
 ## Installation:
  * clone this repo
- * edit the config.yaml to add your bot's client access token found in the dialogflow.com dashboard for your bot
+ * edit the config.yaml to add your bot's name and client access token found in the [dialogflow.com](https://dialogflow.com). dashboard for your bot
  * run ```python run.py```
  
 ## Usage:
 * The server exposes a REST-API at `<your_ip_address>/api/message/<botname>` and supports both GET and POST requests:
+* The botname specified in the config.yaml file will be translated to an endpoint
 
 ``` GET REQUEST:
 
