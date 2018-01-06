@@ -9,6 +9,19 @@ This provides a REST-API to hit several bots with their respective client tokens
 ## Installation:
  * clone this repo
  * edit the config.yaml to add your bot's name and client access token found in the [dialogflow.com](https://dialogflow.com). dashboard for your bot
+ 
+ ### Configuration
+ 
+ Edit config.yaml and add the following:
+ ```
+ ---
+   bots:
+     - name: Homeassistant
+       client_access_token: abcedefghiklmlnopqrstuv123
+     - name: Tasker
+       client_access_token: ffhbdhavbfghgtrbsabgavehf2
+ ```
+ 
  * run ```python run.py```
  
 ## Usage:
@@ -68,7 +81,7 @@ This provides a REST-API to hit several bots with their respective client tokens
 
 
 ``` POST request
-curl -X "POST" http://localhost:8080/api/message/tasker -d '{"query":"turn on bluetooth"}'
+curl -X "POST" -d '{"query":"turn on bluetooth"}'  http://localhost:8080/api/message/tasker 
 
 {
   "id": "5931194f-3481-4551-950b-7e21b91f39fb",
