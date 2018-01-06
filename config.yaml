@@ -1,0 +1,6 @@
+---
+   bots:
+     - name: Homeassistant
+       client_access_token: e78d00f7ba914f049a2fce66e27722d6
+     - name: Tasker
+       client_access_token: 1a2f8bac724f45aa828f82e38d3f3a87
