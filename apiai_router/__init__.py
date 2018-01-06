@@ -31,6 +31,10 @@ def api_ai_request(bot,query):
     return response.read()
 
 
+@app.route('/',methods=['GET'])
+def index():
+    return "Api AI router"
+
 @app.route('/api/message/<botname>',methods=['POST','GET'])
 def router(botname):
     if request.method=='GET':
@@ -46,4 +50,4 @@ def router(botname):
 
 def main():
     read_config()
-    app.run(host="0.0.0.0",port=os.getenv('PORT'))
+    app.run(host="0.0.0.0",port=int(os.getenv('PORT')))
