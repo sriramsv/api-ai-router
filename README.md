@@ -12,7 +12,7 @@ This provides a REST-API to hit several bots with their respective client tokens
  * run ```python run.py```
  
 ## Usage:
-* The server exposes a REST-API at `<your_ip_address>/api/message/<botname> and supports both GET and POST requests:
+* The server exposes a REST-API at `<your_ip_address>/api/message/<botname>` and supports both GET and POST requests:
 
 ``` GET REQUEST:
 
@@ -62,7 +62,9 @@ This provides a REST-API to hit several bots with their respective client tokens
   },
   
   "sessionId": "cf2c6c61068e4ef9a9babebb68115c09"
-}```
+}
+```
+
 
 ``` POST request
 curl -X "POST" http://localhost:8080/api/message/tasker -d '{"query":"turn on bluetooth"}'
