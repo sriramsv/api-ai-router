@@ -16,9 +16,9 @@ This provides a REST-API to hit several bots with their respective client tokens
  ```
  ---
    bots:
-     - name: Homeassistant
+     - name: bot1
        client_access_token: abcedefghiklmlnopqrstuv123
-     - name: Tasker
+     - name: bot2
        client_access_token: ffhbdhavbfghgtrbsabgavehf2
  ```
  
@@ -30,7 +30,7 @@ This provides a REST-API to hit several bots with their respective client tokens
 
 ``` GET REQUEST:
 
- curl localhost:8080/api/message/homeassistant?query="is my garage open?"
+ curl localhost:8080/api/message/bot1?query="is my garage open?"
  
  {
   "id": "20a1474f-3288-4a60-a170-8f46b0e4fded",
@@ -81,7 +81,7 @@ This provides a REST-API to hit several bots with their respective client tokens
 
 
 ``` POST request
-curl -X "POST" -d '{"query":"turn on bluetooth"}'  http://localhost:8080/api/message/tasker 
+curl -X 'POST' -d '{"query":"turn on bluetooth"}'  http://localhost:8080/api/message/bot2
 
 {
   "id": "5931194f-3481-4551-950b-7e21b91f39fb",
