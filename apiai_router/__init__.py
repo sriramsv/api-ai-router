@@ -1,6 +1,6 @@
 import yaml
 import flask
-import sys
+import sys,os
 from utils.bots import BotEnsemble,Bot
 from utils import random_generator
 import apiai
@@ -46,4 +46,4 @@ def router(botname):
 
 def main():
     read_config()
-    app.run(host="0.0.0.0",port=8080)
+    app.run(host="0.0.0.0",port=os.getenv('PORT'))
