@@ -1,6 +1,14 @@
 ---
-   bots:
-     - name: Homeassistant
-       client_access_token: e78d00f7ba914f049a2fce66e27722d6
-     - name: Tasker
-       client_access_token: 1a2f8bac724f45aa828f82e38d3f3a87
+bots:
+  -
+    client_access_token: e78d00f7ba914f049a2fce66e27722d6
+    name: Homeassistant
+  -
+    client_access_token: 1a2f8bac724f45aa828f82e38d3f3a87
+    name: Tasker
+join:
+  api_key: ae854ef404d341dc82fca9514642fc26
+  devices:
+    -
+      device_id: 5b96a4cfe0ef47da8b771e00be365e61
+      name: phone
