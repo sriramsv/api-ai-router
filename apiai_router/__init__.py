@@ -30,12 +30,18 @@ def api_ai_request(bot,query):
     request.query = query
     response = request.getresponse()
     r=response.read()
-    return frame_response(json.loads(r)["result"]["fulfillment"]["speech"])
+    return r
 
-def frame_response(msg):
-    d=json.loads({"messages": [{"text": ""}]})
-    d["messages"][0]["text"]=msg
-    return d
+
+def frameresponse(msg):
+    text=json.loads(msg)
+    messages=[]
+    speech={"text":text['result']['fulfillment']['speech']}
+    messages.append(speech)
+    chatfuel_response={"messages":messages}
+    return json.dumps(chatfuel_response)
+
+
 @app.route('/',methods=['GET'])
 def index():
     return "Api AI router"
@@ -54,8 +60,9 @@ def router(botname):
     if not botensemble.isBot(botname):
         return Response(404,"Bot Not found")
     bot=botensemble.getBot(botname)
-    
-    return api_ai_request(bot,query)
+
+    r=api_ai_request(bot,query)
+    return frameresponse(r)
 
 def main():
     read_config()
