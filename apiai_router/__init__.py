@@ -30,9 +30,12 @@ def api_ai_request(bot,query):
     request.query = query
     response = request.getresponse()
     r=response.read()
-    return json.loads(r)["result"]["fulfillment"]["speech"]
+    return frame_response(json.loads(r)["result"]["fulfillment"]["speech"])
 
-
+def frame_response(msg):
+    d=json.loads({"messages": [{"text": ""}]})
+    d["messages"][0]["text"]=msg
+    return d
 @app.route('/',methods=['GET'])
 def index():
     return "Api AI router"
@@ -51,6 +54,7 @@ def router(botname):
     if not botensemble.isBot(botname):
         return Response(404,"Bot Not found")
     bot=botensemble.getBot(botname)
+    
     return api_ai_request(bot,query)
 
 def main():
