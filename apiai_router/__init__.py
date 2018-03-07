@@ -30,7 +30,7 @@ def api_ai_request(bot,query):
     request.query = query
     response = request.getresponse()
     r=response.read()
-    return r["result"]["fulfillment"]["speech"]
+    return json.loads(r)["result"]["fulfillment"]["speech"]
 
 
 @app.route('/',methods=['GET'])
