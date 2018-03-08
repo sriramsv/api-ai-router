@@ -1,46 +1,23 @@
 import yaml
 import flask
 import sys,os
-from utils.bots import BotEnsemble,Bot
-import apiai
+from utils.bots import BotEnsemble,Bot,ApiAi
+from utils import getTokens
+
 import json,yaml
 from flask import Flask,request,jsonify,Response,Session
 
 botensemble=BotEnsemble()
-
+apiai=ApiAi(botensemble)
 app = Flask(__name__)
 
-CONFIG="config.yaml"
 def read_config():
-
-    with open(CONFIG, 'r') as ymlfile:
-        cfg = yaml.load(ymlfile)
-    if not "bots" in cfg.keys():
-        sys.exit("No bots found")
-
-    for b in cfg['bots']:
-        bot=Bot(b['name'].lower(),b['client_access_token'])
-        botensemble.addBot(bot)
-
-
-def api_ai_request(bot,query):
-    token=bot.get_token()
-    ai = apiai.ApiAI(token)
-    request = ai.text_request()
-    request.query = query
-    response = request.getresponse()
-    r=response.read()
-    return r
-
-
-def frameresponse(msg):
-    text=json.loads(msg)
-    messages=[]
-    speech={"text":text['result']['fulfillment']['speech']}
-    messages.append(speech)
-    chatfuel_response={"messages":messages}
-    return json.dumps(chatfuel_response)
-
+    bots=getTokens()
+    if not bots:
+        exit(-1)
+    for b,t in bots.items():
+        bot=Bot(b.lower(),t)
+        apiai.bots.addBot(bot)
 
 @app.route('/',methods=['GET'])
 def index():
@@ -59,10 +36,8 @@ def router(botname):
         return Response(400,"Invalid request")
     if not botensemble.isBot(botname):
         return Response(404,"Bot Not found")
-    bot=botensemble.getBot(botname)
-
-    r=api_ai_request(bot,query)
-    return frameresponse(r)
+    r=apiai.make_request(botname,query)
+    return r.chatfuel_text()
 
 def main():
     read_config()
